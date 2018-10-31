@@ -12,6 +12,14 @@ class MLMetrics
     end
     sum_log_loss / real.length
   end
+  
+  def self.l2_loss_metric(real, pred)
+      sum_l2_loss = 0.0
+      real.zip(pred).each do |real_label, prediction|
+        sum_l2_loss = sum_l2_loss + (real_label - prediction) ** 2
+      end
+    sum_l2_loss / real.length
+    end
 
 end
 
