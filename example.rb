@@ -43,7 +43,7 @@ gbt = GBT.new()
 
 gbt.train(params,
   dataset_train,
-  num_boost_round=20,
+  num_boost_round=100,
   valid_set=dataset_valid,
   early_stopping_rounds=10,
   objective="binary")
@@ -61,4 +61,4 @@ end
 logloss = MLMetrics.log_loss_metric(dataset_valid.y().to_a, preds.sigmoid!)  
 
 
-puts 'The LogLoss of prediction is:'  + String(logloss)
+puts 'The LogLoss of valid set is:'  + String(logloss)

@@ -72,9 +72,8 @@ class GBT
 
     grad = prob.subtract(y_true)
 
-    fixed_ones = Array.new(y_hat.length) { |i| 1 }
-    prob2 = fixed_ones.subtract(prob)
-    hess = prob.multiply(prob2)
+    fixed_ones = Array.fixed_array(y_hat.length,1)
+    hess = prob.multiply(fixed_ones.subtract(prob))
     return grad, hess
   end
 
@@ -200,10 +199,11 @@ class GBT
         puts "Iter #{best_iteration}, Train's loss: #{best_val_loss}"
         break
       end
-    end # end for loop
+    end
     self.models = models
     self.best_iteration = best_iteration
-    puts "Training finished. "
+    total_train_time = Time.now - train_start_time
+    puts "Training finished. Elapsed: #{total_train_time.round(2)} secs"
   end
 
 end
