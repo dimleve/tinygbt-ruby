@@ -8,7 +8,7 @@ class Array
   end
 
   def subtract(other_ary)
-    self.map.with_index {|v, i| (v-Float(other_ary[i]))}
+    self.map.with_index {|v, i| (v-other_ary[i])}
   end
 
   def multiply(other_ary)

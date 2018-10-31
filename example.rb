@@ -3,6 +3,7 @@ require 'Array'
 require 'Dataset'
 require 'GBT'
 require 'matrix'
+require 'rroc'
 
 def sigmoid(input)
   1.0 / (1.0 + Math.exp(-input))
@@ -51,3 +52,19 @@ gbt.train(params,
   valid_set=dataset_valid,
   early_stopping_rounds=10,
   objective="binary")
+
+puts 'Start predicting...'
+
+preds = Array.fixed_array(dataset_valid.y().length, 0)
+
+dataset_valid.x().each_with_index do |x, xi|
+  pred = gbt.predict(x=x, nil, num_iteration=gbt.best_iteration)
+  y = dataset_valid.y()[xi]
+  preds[xi]  = pred
+end
+
+logloss = MLMetrics.log_loss_metric(dataset_valid.y().to_a, preds.sigmoid!)  
+
+
+puts 'The LogLoss of prediction is:'  + String(logloss)
+#puts 'The AUC of prediction is:'  + roc_auc_score(y_test, inverse_logit_function(np.array(y_pred)))
