@@ -13,7 +13,6 @@ csv = CSV.parse(csv_text, :headers => false)
 csv_valid = csv.shuffle.sample(csv.length * 0.1)
 csv_train = csv - csv_valid
 
-
 mat = Matrix[ *csv_train ]
 y_train = mat.column(4).to_a.map(&:to_i)
 
@@ -71,8 +70,6 @@ temp.delete_at(0)
 csv_train = temp.transpose
 
 dataset_train = Dataset.new(csv_train, y_train)
-
-
   
 csv_test = CSV.read('.\\data\\regression.test', { :col_sep => "\t" })
 
@@ -109,4 +106,4 @@ end
 
 l2_loss = MLMetrics.l2_loss_metric(dataset_valid.y().to_a, preds.sigmoid!)  
 
-puts 'The L2 of valid set is:'  + String(l2_loss ** 0.5)
+puts 'The RMSE of valid set is:'  + String(l2_loss ** 0.5)
