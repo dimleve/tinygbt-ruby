@@ -48,9 +48,8 @@ puts 'Start predicting...'
 preds = Array.fixed_array(dataset_valid.y().length, 0)
 
 dataset_valid.x().each_with_index do |x, xi|
-  pred = gbt.predict(x=x, nil, num_iteration=gbt.best_iteration)
+  preds[xi] = gbt.predict(x=x, nil, num_iteration=gbt.best_iteration)
   y = dataset_valid.y()[xi]
-  preds[xi]  = pred
 end
 
 logloss = MLMetrics.log_loss_metric(dataset_valid.y().to_a, preds.sigmoid!)  
@@ -99,11 +98,9 @@ puts 'Start predicting...'
 preds = Array.fixed_array(dataset_valid.y().length, 0)
 
 dataset_valid.x().each_with_index do |x, xi|
-  pred = gbt.predict(x=x, nil, num_iteration=gbt.best_iteration)
-  y = dataset_valid.y()[xi]
-  preds[xi]  = pred
+  preds[xi] = gbt.predict(x=x, nil, num_iteration=gbt.best_iteration)
 end
 
-l2_loss = MLMetrics.l2_loss_metric(dataset_valid.y().to_a, preds.sigmoid!)  
+l2_loss = MLMetrics.l2_loss_metric(dataset_valid.y().to_a, preds)  
 
-puts 'The RMSE of valid set is:'  + String(l2_loss ** 0.5)
+puts 'The RMSE of valid set is: '  + String(l2_loss ** 0.5)
