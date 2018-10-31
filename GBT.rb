@@ -38,7 +38,7 @@ class GBT
     if scores.nil? || scores.empty?
       grad = Array.rand_array(labels.length, 100)
     else
-      for i in (0..labels.legth-1)
+      for i in (0..labels.length-1)
         grad[i] = 2 * (scores[i] - labels[i])
       end
     end
