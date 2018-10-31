@@ -3,11 +3,6 @@ require 'Array'
 require 'Dataset'
 require 'GBT'
 require 'matrix'
-require 'rroc'
-
-def sigmoid(input)
-  1.0 / (1.0 + Math.exp(-input))
-end
 
 csv_text = File.read('.\\data\\data_banknote_authentication.txt')
 csv = CSV.parse(csv_text, :headers => false)
@@ -67,4 +62,3 @@ logloss = MLMetrics.log_loss_metric(dataset_valid.y().to_a, preds.sigmoid!)
 
 
 puts 'The LogLoss of prediction is:'  + String(logloss)
-#puts 'The AUC of prediction is:'  + roc_auc_score(y_test, inverse_logit_function(np.array(y_pred)))
