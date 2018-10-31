@@ -1,4 +1,4 @@
 # tinygbt-ruby
-This a minimal Ruby implementation of the Gradient Boosted Trees algorithm, original project https://github.com/lancifollia/tinygbt
+This is a minimal pure Ruby implementation of the Gradient Boosted Trees algorithm, based on the original project: https://github.com/lancifollia/tinygbt
 
 Currently supports L2 regression and binary classification (Log Loss function)
