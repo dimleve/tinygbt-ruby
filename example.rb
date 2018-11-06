@@ -55,7 +55,7 @@ end
 logloss = MLMetrics.log_loss_metric(dataset_valid.y().to_a, preds.sigmoid!)  
 
 
-puts 'The LogLoss of valid set is:'  + String(logloss)
+puts 'The LogLoss of valid set is: '  + String(logloss)
 
 # Regression example
 

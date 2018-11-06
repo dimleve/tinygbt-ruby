@@ -57,16 +57,15 @@ class TreeNode
     end
 
     # for all feature ids (indexes)
-    #(0..num_features-1).step(1) do |feature_id|
     for feature_id in (0..num_features-1)
 
       g_l = 0.0
       h_l = 0.0
 
+      # sort values of feature_id
       sorted_instance_ids = instances.map {|row| row[feature_id]}.map.with_index.sort.map(&:last)
 
       # try to find the best split_value for the current feature id
-      #(0..sorted_instance_ids.length-1).step(1) do |j|
       for j in (0..sorted_instance_ids.length-1)
         # calculate gradient and hessian left
         g_l = g_l + grad[sorted_instance_ids[j]]
@@ -79,6 +78,7 @@ class TreeNode
         # calculate gain when splitting value is instances[sorted_instance_ids[j]][feature_id]
         current_gain = _calc_split_gain(grad_sum, hess_sum, g_l, h_l, g_r, h_r, param['lambda'])
 
+        # check if we have a better split point according to the gain equation
         if current_gain > best_gain
           best_gain = current_gain
           best_feature_id = feature_id
