@@ -1,6 +1,6 @@
-require 'Array'
-require 'MLMetrics'
-require 'Tree'
+require_relative './Array'
+require_relative './MLMetrics'
+require_relative './Tree'
 
 class GBT
   attr_accessor :params, :best_iteration, :models

@@ -1,5 +1,5 @@
 require "test/unit/assertions"
-require 'TreeNode'
+require_relative './TreeNode'
 
 include Test::Unit::Assertions
 

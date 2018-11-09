@@ -1,4 +1,4 @@
-require 'Array'
+require_relative './Array'
 
 class MLMetrics
   def self.log_loss_metric(real, pred)

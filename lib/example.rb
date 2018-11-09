@@ -1,8 +1,9 @@
 require 'csv'
-require 'Array'
-require 'Dataset'
-require 'GBT'
 require 'matrix'
+require_relative './Array'
+require_relative './Dataset'
+require_relative './GBT'
+
 
 # Binary classification example
 

@@ -1,4 +1,4 @@
-require 'Array'
+require_relative './Array'
 
 class TreeNode
   # something like Java getters and setters
@@ -56,13 +56,18 @@ class TreeNode
       num_features = instances.to_a[0].length
     end
 
+    """
+      Algorithm is: Exact Greedy Algorithm for Split Finding
+      (Refer to Eq5 of Reference[1])
+    """
     # for all feature ids (indexes)
     for feature_id in (0..num_features-1)
 
       g_l = 0.0
       h_l = 0.0
 
-      # sort values of feature_id
+      # sort values of feature_id in order to be able accumulate the gradient statistics
+      # Remember that an internal node split is of the form: x <= value OR x > value
       sorted_instance_ids = instances.map {|row| row[feature_id]}.map.with_index.sort.map(&:last)
 
       # try to find the best split_value for the current feature id
