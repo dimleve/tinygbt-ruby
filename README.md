@@ -5,4 +5,4 @@ Currently supports L2 regression and binary classification (Log Loss function)
 
 Run form command line: 
 
-> ruby -I . example.rb
+> ruby -I . ./lib/example.rb
