@@ -3,6 +3,10 @@ This is a minimal pure Ruby implementation of the Gradient Boosted Trees algorit
 
 Currently supports L2 regression and binary classification (Log Loss function)
 
+In the following post you can find some maths behind the implementation:
+
+https://medium.com/@dimleve/xgboost-mathematics-explained-58262530904a
+
 ### Run from command line: 
 
 > ruby -I . ./lib/example.rb
