@@ -22,23 +22,23 @@ class GBT
       return nil
     end
 
-    x = train_set.x()
+    x = train_set.x
     scores = Array.fixed_array(x.length, 0)
 
-    x.each_with_index  { |val,index| scores[index] = self.predict(val, models=models) }
+    x.each_with_index  { |val, index| scores[index] = predict(val, models = models) }
 
     scores
   end
 
   def _calc_l2_gradient(train_set, scores)
-    labels = train_set.y()
+    labels = train_set.y
     hessian = Array.fixed_array(labels.length, 2)
     grad = Array.fixed_array(labels.length, 0)
 
     if scores.nil? || scores.empty?
       grad = Array.rand_array(labels.length, 100)
     else
-      for i in (0..labels.length-1)
+      (0..labels.length-1).each do |i|
         grad[i] = 2 * (scores[i] - labels[i])
       end
     end
@@ -53,13 +53,13 @@ class GBT
   def _calc_l2_loss(models, data_set)
     sum_errors = 0.0
 
-    data_set.x().each_with_index do |x, xi|
+    data_set.x.each_with_index do |x, xi|
       pred = predict(x, models)
-      y = data_set.y()[xi]
-      sum_errors = sum_errors + (pred - y) **2
+      y = data_set.y[xi]
+      sum_errors += (pred - y) **2
     end
 
-    sum_errors / data_set.x().length
+    sum_errors / data_set.x.length
   end
 
   def _calc_loss(models, data_set)
@@ -78,7 +78,7 @@ class GBT
   end
 
   def _calc_log_loss_gradient(train_set, scores)
-    labels = train_set.y()
+    labels = train_set.y
     hessian = Array.fixed_array(labels.length, 0)
     grad = Array.fixed_array(labels.length, 0)
 
@@ -88,17 +88,18 @@ class GBT
     else
       grad, hessian = logLikelihoodLoss(scores, labels)
     end
+
     return grad, hessian
   end
 
   def _calc_logloss_loss(models, data_set)
-    preds = Array.fixed_array(data_set.x().length, 0)
+    preds = Array.fixed_array(data_set.x.length, 0)
     data_set.x().each_with_index do |x, xi|
       preds[xi] = predict(x, models)
     end
 
-    logloss = MLMetrics.log_loss_metric(data_set.y().to_a, preds.sigmoid!)
-    return logloss
+    logloss = MLMetrics.log_loss_metric(data_set.y.to_a, preds.sigmoid!)
+    logloss
   end
 
   def _calc_log_loss(models, data_set)
@@ -108,7 +109,7 @@ class GBT
   def _build_learner(train_set, grad, hessian, shrinkage_rate)
     learner = Tree.new()
     learner.build(train_set.x, grad, hessian, shrinkage_rate, self.params)
-    return learner
+    learner
   end
 
   def predict(x, models=nil, num_iteration = nil)
@@ -122,8 +123,8 @@ class GBT
 
     # assert models is not nil
     sum_preds = 0.0
-    for m in (0..num_iteration-1)
-      sum_preds = sum_preds + models[m].predict(x)
+    (0..num_iteration-1).each do |m|
+      sum_preds += models[m].predict(x)
     end
     sum_preds
   end

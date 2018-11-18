@@ -1,18 +1,18 @@
 class Array
   def square!
-    self.map! {|num| num ** 2}
+    map! {|num| num ** 2}
   end
 
   def add!(number)
-    self.map! {|num| num + number}
+    map! {|num| num + number}
   end
 
   def subtract(other_ary)
-    self.map.with_index {|v, i| (v-other_ary[i])}
+    map.with_index {|v, i| (v-other_ary[i])}
   end
 
   def multiply(other_ary)
-    self.map.with_index {|v, i| (v*other_ary[i])}
+    map.with_index {|v, i| (v*other_ary[i])}
   end
 
   def self.rand_array(x, max)
@@ -30,6 +30,7 @@ class Array
 
   def get_dimension a
     return 0 if a.class != Array
+
     result = 1
     a.each do |sub_a|
       if sub_a.class == Array
@@ -37,11 +38,11 @@ class Array
         result = dim + 1 if dim + 1 > result
       end
     end
-    return result
+    result
   end
 
   def filter f
-    select.with_index { |e,i| f.include?(i) == true }
+    select.with_index { |e,i| f.include?(i) }
   end
 
   def self.fixed_array(size, val)

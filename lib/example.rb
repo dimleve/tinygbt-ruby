@@ -7,7 +7,7 @@ require_relative './GBT'
 
 # Binary classification example
 
-csv_text = File.read('.\\data\\data_banknote_authentication.txt')
+csv_text = File.read('..\\data\\data_banknote_authentication.txt')
 csv = CSV.parse(csv_text, :headers => false)
 
 # keep 10% for evaluation
@@ -60,9 +60,9 @@ puts 'The LogLoss of valid set is: '  + String(logloss)
 
 # Regression example
 
-csv_train = CSV.read('.\\data\\regression.train', { :col_sep => "\t" })
+csv_train = CSV.read('..\\data\\regression.train', { :col_sep => "\t" })
 
-mat = Matrix[ *csv_train ]
+mat = Matrix[*csv_train]
 y_train = mat.column(0).to_a.map(&:to_i)
 
 temp = csv_train.transpose
@@ -71,9 +71,9 @@ csv_train = temp.transpose
 
 dataset_train = Dataset.new(csv_train, y_train)
   
-csv_test = CSV.read('.\\data\\regression.test', { :col_sep => "\t" })
+csv_test = CSV.read('..\\data\\regression.test', { :col_sep => "\t" })
 
-mat = Matrix[ *csv_test ]
+mat = Matrix[*csv_test]
 y_test = mat.column(0).to_a.map(&:to_i)
 
 temp = csv_test.transpose

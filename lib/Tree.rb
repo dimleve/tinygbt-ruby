@@ -1,9 +1,9 @@
 require "test/unit/assertions"
 require_relative './TreeNode'
 
-include Test::Unit::Assertions
-
 class Tree
+  include Test::Unit::Assertions
+
   # something like Java getters and setters
   attr_accessor :root
   def build(instances, grad, hessian, shrinkage_rate, param)
