@@ -9,7 +9,8 @@ https://medium.com/@dimleve/xgboost-mathematics-explained-58262530904a
 
 ### Run from command line: 
 
-> ruby -I . ./lib/example.rb
+> cd lib/
+> ruby ./example.rb
 
 ### Features
 
