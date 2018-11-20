@@ -130,6 +130,8 @@ class GBT
   end
 
   def train(params, train_set, num_boost_round=20, valid_set=None, early_stopping_rounds=5, objective="regression")
+    self.params.merge!(params)
+    
     models = []
     shrinkage_rate = 1.0
     best_iteration = nil

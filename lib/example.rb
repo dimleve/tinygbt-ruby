@@ -32,7 +32,12 @@ csv_valid = temp.transpose
 
 dataset_valid = Dataset.new(csv_valid, y_valid)
 
-params = {}
+params = {'gamma' => 0.0,
+'lambda' => 1.0,
+'min_split_gain'  => 0.1,
+'max_depth' => 5,
+'learning_rate' => 0.1,
+}
 
 puts 'Start training...'
 gbt = GBT.new
