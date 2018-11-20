@@ -79,8 +79,6 @@ class GBT
 
   def _calc_log_loss_gradient(train_set, scores)
     labels = train_set.y
-    hessian = Array.fixed_array(labels.length, 0)
-    grad = Array.fixed_array(labels.length, 0)
 
     if scores.nil? || scores.empty?
       grad = Array.rand_array(labels.length, 100)
@@ -107,7 +105,7 @@ class GBT
   end
 
   def _build_learner(train_set, grad, hessian, shrinkage_rate)
-    learner = Tree.new()
+    learner = Tree.new
     learner.build(train_set.x, grad, hessian, shrinkage_rate, self.params)
     learner
   end
@@ -129,9 +127,9 @@ class GBT
     sum_preds
   end
 
-  def train(params, train_set, num_boost_round=20, valid_set=None, early_stopping_rounds=5, objective="regression")
+  def train(params, train_set, num_boost_round=20, valid_set=None, early_stopping_rounds=5, objective='regression')
     self.params.merge!(params)
-    
+
     models = []
     shrinkage_rate = 1.0
     best_iteration = nil
@@ -140,27 +138,26 @@ class GBT
 
     puts "Training until validation scores don't improve for " + String(early_stopping_rounds) + " rounds."
 
-    for iter_cnt in (0..num_boost_round-1)
+    (0..num_boost_round - 1).each do |iter_cnt|
       iter_start_time = Time.now
       scores = _calc_training_data_scores(train_set, models)
-      if objective == "regression"
+      if objective == 'regression'
         grad, hessian = self._calc_gradient(train_set, scores)
       end
-      if objective == "binary"
+      if objective == 'binary'
         grad, hessian = self._calc_log_loss_gradient(train_set, scores)
       end
-      
+
       learner = _build_learner(train_set, grad, hessian, shrinkage_rate)
-      
+
       if iter_cnt > 0
-        shrinkage_rate = shrinkage_rate * self.params['learning_rate']
+        shrinkage_rate *= self.params['learning_rate']
       end
-      
+
       models << learner
-      
-      if objective == "regression"
+
+      if objective == 'regression'
         train_loss = self._calc_loss(models, train_set)
-        
         if valid_set.nil?
           val_loss = nil
         else
