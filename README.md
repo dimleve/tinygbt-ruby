@@ -3,7 +3,9 @@ This is a minimal pure Ruby implementation of the Gradient Boosted Trees algorit
 
 Currently supports L2 regression and binary classification (Log Loss function)
 
-In the following post you can find some maths behind the implementation:
+### Gradient Boosted Trees algorithm: 
+
+In the following post you can find some maths and algorithms behind the implementation:
 
 https://medium.com/@dimleve/xgboost-mathematics-explained-58262530904a
 
@@ -25,6 +27,15 @@ https://medium.com/@dimleve/xgboost-mathematics-explained-58262530904a
 | Classification | {0,1} | -(y log(p) + (1 - y) log(1 - p)) | p-y | p*(1-p)
 
 [How to find the 1st and 2nd derivates of Log Loss function](https://stats.stackexchange.com/questions/231220/how-to-compute-the-gradient-and-hessian-of-logarithmic-loss-question-is-based)
+
+### Create GEM
+
+Go to the base directiry of the project and run:
+>gem build tinygbt_ruby.gemspec <br />
+>gem install ./tinygbt_ruby-0.1.0.gem <br />
+
+And if you want to use tinygbt-ruby in you project just include it by:
+> require 'tinygbt'
 
 ### References
 
