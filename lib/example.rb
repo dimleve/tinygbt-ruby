@@ -35,7 +35,7 @@ dataset_valid = Dataset.new(csv_valid, y_valid)
 params = {}
 
 puts 'Start training...'
-gbt = GBT.new()
+gbt = GBT.new
 
 gbt.train(params,
   dataset_train,
@@ -85,7 +85,7 @@ dataset_valid = Dataset.new(csv_test, y_test)
 params = {}
 
 puts 'Start training...'
-gbt = GBT.new()
+gbt = GBT.new
 
 gbt.train(params,
   dataset_train,

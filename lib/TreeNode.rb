@@ -110,7 +110,7 @@ class TreeNode
                             shrinkage_rate,
                             depth + 1, param)
 
-      self.right_child = TreeNode.new()
+      self.right_child = TreeNode.new
 
       self.right_child.build(instances.filter(best_right_instance_ids),
                              grad.filter(best_right_instance_ids),
