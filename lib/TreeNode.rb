@@ -1,7 +1,6 @@
 require_relative './Array'
 
 class TreeNode
-  # something like Java getters and setters
   attr_accessor :is_leaf, :left_child, :right_child, :split_feature_id, :split_val, :weight
 
   def _calc_split_gain(grad, hess, grad_l, hess_l, grad_r, hess_r, lambd)
@@ -9,7 +8,7 @@ class TreeNode
   end
 
   def calc_term(g, h, lambd)
-    sqrt_g = g ** 2
+    sqrt_g = g**2
     plus_lambd = h + lambd
     sqrt_g / plus_lambd
   end
@@ -21,20 +20,16 @@ class TreeNode
   end
 
   def _calc_leaf_weight(grad, hessian, lambd)
-    "" "
-    Calculate the optimal weight of this leaf node.
-    (Refer to Eq5 of Reference[1])
-    " ""
+    # Calculate the optimal weight of this leaf node.
+    # (Refer to Eq5 of Reference[1])
     grad_sum = grad.sum!
     hess_sum = hessian.sum!
     -(grad_sum / (hess_sum + lambd))
   end
 
   def build(instances, grad, hessian, shrinkage_rate, depth, param)
-    "" "
-    Exact Greedy Alogirithm for Split Finidng
-    (Refer to Algorithm1 of Reference[1])
-    " ""
+    # Exact Greedy Alogirithm for Split Finidng
+    # (Refer to Algorithm1 of Reference[1])
 
     if depth > param['max_depth']
       self.is_leaf = true
@@ -57,10 +52,6 @@ class TreeNode
       num_features = instances.to_a[0].length
     end
 
-    "" "
-      Algorithm is: Exact Greedy Algorithm for Split Finding
-      (Refer to Eq5 of Reference[1])
-    " ""
     # for all feature ids (indexes)
     (0..num_features - 1).each do |feature_id|
 
