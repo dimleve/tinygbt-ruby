@@ -30,7 +30,7 @@ https://medium.com/@dimleve/xgboost-mathematics-explained-58262530904a
 
 ### Create GEM
 
-Go to the base directiry of the project and run:
+Go to the base directory of the project and run:
 >gem build tinygbt_ruby.gemspec <br />
 >gem install ./tinygbt_ruby-0.1.0.gem <br />
 
